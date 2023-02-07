@@ -1,2 +1,65 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/header :: head (title='Student List View')}"></head>
+<body>
+<div class="container"  style="background-image: url('/images/miu2.jpeg')">
+    <div th:insert="~{fragments/navigation :: navigation}"></div>
+    <div>
+        <div><p>&nbsp;</p></div>
+        <div class="col">
+            <div class="box bg-info"><strong>Student List View</strong></div>
+
+            <div class="d-flex col">
+                <div class="d-inline p-2 bg-transparent text-dark flex-grow-1 text-left">
+                    <span>Search</span>
+                    <input type="text" id="search-input" name="search-input" th:value="${searchValue}" />
+                    <button type="button" class="btn btn-primary" onclick="location.href = '/student/search?searchValue=' + $('#search-input').val();">Search</button>
+                </div>
+
+                <div class="d-inline p-2 bg-transparent text-dark flex-grow-1 text-end">
+                    <a href="/student/new"><span class="btn-link">Register New Student</span></a>
+                </div>
+            </div>
+
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Student Number</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>CGPA</th>
+                    <th>Enrollment Date</th>
+                    <th>International Student?</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student, stats: ${students}">
+                    <td th:text="${stats.count}"></td>
+                    <td th:text="${student.studentNumber}"></td>
+                    <td th:text="${student.firstName}"></td>
+                    <td th:text="${student.middleName}"></td>
+                    <td th:text="${student.lastName}"></td>
+                    <td th:text="${student.cgpa}"></td>
+                    <!--<td th:text="${#dates.format(student.dateOfEnrollment, 'yyyy-MM-dd')}"></td>-->
+                    <td th:text="${student.dateOfEnrolment}"></td>
+                    <td th:text="${student.International}"></td>
+                    <td>
+                        <a th:href="@{/student/edit/{studentId} (studentId=${student.studentId})}">Edit</a> |
+                        <form th:action="@{/student/delete/{studentId} (studentId=${student.studentId})}" method="post">
+                            <div><button type="submit" class="btn btn-link" onclick="confirm('Are you sure to delete?')">Delete</button></div>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>
 

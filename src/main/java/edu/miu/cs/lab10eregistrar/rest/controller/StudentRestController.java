@@ -10,7 +10,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-@RequestMapping("/api/student")
+@RequestMapping("eregistrar/api/student")
 @RestController
 public class StudentRestController {
 
@@ -23,7 +23,7 @@ public class StudentRestController {
         return ResponseEntity.ok(students);
     }
 
-    @GetMapping(value = "/{studentId}", produces = "application/json")
+    @GetMapping(value = "/get/{studentId}", produces = "application/json")
     public Student getStudentById(@PathVariable Long studentId) {
         return studentService.get(studentId);
     }

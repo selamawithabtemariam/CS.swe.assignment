@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/header :: head (title='Edit Student Information')}"></head>
+<body>
+<div class="container"  style="background-image: url('/images/miu2.jpeg')">
+    <div th:insert="~{fragments/navigation :: navigation}"></div>
+    <div>
+        <div>
+            <div><p>&nbsp;</p></div>
+            <div class="col">
+                <div class="box bg-info"><strong>Update Student Information</strong></div>
+            </div>
+
+            <form th:action="@{/student/update/{studentId} (studentId=${student.studentId})}" th:object="${student}" method="post">
+                <div class="m-3">
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Student Number</label>
+                        <div class="col-8">
+                            <input type="text" th:field="*{studentNumber}" class="form-control" required placeholder="Student Number" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">First Name</label>
+                        <div class="col-8">
+                            <input type="text" th:field="*{firstName}" class="form-control" required placeholder="First Name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Middle Name</label>
+                        <div class="col-8">
+                            <input type="text" th:field="*{middleName}" class="form-control" placeholder="Middle Name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Last Name</label>
+                        <div class="col-8">
+                            <input type="text" th:field="*{lastName}" class="form-control" required placeholder="Last Name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">CGPA</label>
+                        <div class="col-8">
+                            <input type="text" th:field="*{cgpa}" class="form-control" placeholder="CGPA" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Enrollment Date</label>
+                        <div class="col-8">
+                            <input type="date" th:field="*{dateOfEnrollment}" class="form-control" required placeholder="Enrollment Date" pattern="yyyy-MM-dd" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Is International</label>
+                        <div class="col-8">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="international-true" name="international-true" class="custom-control-input" value="1" th:field="*{international}">
+                                <label class="custom-control-label" for="international-true">International</label>
+                            </div>
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="international-false" name="international-false" class="custom-control-input" value="0" th:field="*{international}">
+                                <label class="custom-control-label" for="international-false">Local</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="align-self-center">
+                        <button type="submit" class="btn btn-primary align-content-center">Update</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div><p>&nbsp;</p></div>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>
